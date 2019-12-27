@@ -21,7 +21,7 @@ class _InputPageState extends State<InputPage> {
   Color femaleCardColor = kInactiveCardColor;
 
   Gender selectedGender;
-
+  int height = 180;
 //  void updateColor(Gender selectedGender) {
 //    if (selectedGender == Gender.male) {
 //      if (maleCardColor == inactiveCardColor) {
@@ -90,14 +90,19 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: ReusableCard(
               cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
                       'HEIGHT',
                     style: kLabelTextStyle,
                       ),
-                  Row(children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
                     Text(
-                      '128',
+                      height.toString(),
                       style: kNumberTextStyle,
                     ),
                     Text(
@@ -105,6 +110,18 @@ class _InputPageState extends State<InputPage> {
                       style: kLabelTextStyle,
                     ),
                   ],),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 120.0,
+                    max: 220.0,
+                    activeColor: Color(0xFFEB1555),
+                    inactiveColor: Color(0xFF8D8E98),
+                    onChanged: (double newValue){
+                      setState(() {
+                        height = newValue.round();
+                      });
+                    },
+                  ),
                 ],
               ),
               colour: kActiveCardColor,
